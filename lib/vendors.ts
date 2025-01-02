@@ -28,7 +28,7 @@ const vendors: Vendor[] = [
     slug: 'queseria-roncal',
     name: 'Quesería Roncal',
     description: 'Productores artesanales de queso D.O. Roncal desde 1980.',
-    longDescription: 'En Quesería Roncal, llevamos más de cuatro décadas elaborando el auténtico queso D.O.P. Roncal. Nuestro compromiso con la tradición y la calidad nos ha convertido en un referente de la gastronomía navarra. Utilizamos leche de oveja de razas autóctonas y técnicas artesanales para crear un queso de sabor inigualable.',
+    longDescription: 'En Quesería Roncal, llevamos más de cuatro décadas elaborando el auténtico queso D.O.P. Roncal. Nuestro compromiso con la tradición y la calidad nos ha convertido en un referente de la gastronomía navarra. Usamos leche de oveja de razas autóctonas y técnicas artesanales para crear un queso de sabor inigualable.',
     imageUrl: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=800&q=60',
     heroImageUrl: 'https://images.unsplash.com/photo-1571166574917-826d6d3e8754?auto=format&fit=crop&w=1920&q=80',
     thumbnailUrl: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=80&h=80&q=60',
