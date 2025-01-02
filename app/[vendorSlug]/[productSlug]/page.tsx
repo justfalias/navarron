@@ -22,11 +22,14 @@ function ProductDetailsSkeleton() {
   )
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { vendorSlug: string; productSlug: string }
-}) {
+interface PageProps {
+  params: {
+    vendorSlug: string
+    productSlug: string
+  }
+}
+
+export default async function Page({ params }: PageProps) {
   let vendorSlug, productSlug
   try {
     vendorSlug = decodeURIComponent(params.vendorSlug)
@@ -57,16 +60,12 @@ export default async function Page({
       )
     }
 
-    const relatedProducts = await getRelatedProducts(product.id, vendor.id)
-
-    const relatedProductsWithVendor = relatedProducts.map(relatedProduct => ({
-      ...relatedProduct,
-      vendor: {
-        id: vendor.id,
-        name: vendor.name,
-        slug: vendor.slug
-      }
-    }))
+    const relatedProductsWithVendor = await getRelatedProducts(product.id).then((relatedProducts) => 
+      relatedProducts.map((relatedProduct) => ({
+        ...relatedProduct,
+        vendor,
+      }))
+    )
 
     return (
       <div className="container mx-auto">
