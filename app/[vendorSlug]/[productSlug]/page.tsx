@@ -6,14 +6,7 @@ import { ErrorMessage } from '@/components/error-message'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 
-interface ProductPageProps {
-  params: {
-    vendorSlug: string
-    productSlug: string
-  }
-}
-
-async function ProductDetailsSkeleton() {
+function ProductDetailsSkeleton() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid md:grid-cols-2 gap-8">
@@ -31,7 +24,9 @@ async function ProductDetailsSkeleton() {
 
 export default async function ProductPage({
   params,
-}: ProductPageProps) {
+}: {
+  params: { vendorSlug: string; productSlug: string }
+}) {
   try {
     const vendor = await getVendorBySlug(decodeURIComponent(params.vendorSlug))
 
