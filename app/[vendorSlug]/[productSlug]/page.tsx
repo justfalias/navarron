@@ -6,14 +6,19 @@ import { ErrorMessage } from '@/components/error-message'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 
-interface PageProps {
+// Define the correct types for Next.js App Router page props
+type PageProps = {
   params: {
     vendorSlug: string
     productSlug: string
   }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function ProductPage({ params }: PageProps) {
+export default async function ProductPage({
+  params,
+  searchParams,
+}: PageProps) {
   try {
     const vendor = await getVendorBySlug(decodeURIComponent(params.vendorSlug))
 
@@ -69,7 +74,7 @@ export default async function ProductPage({ params }: PageProps) {
   }
 }
 
-function ProductDetailsSkeleton() {
+function ProductDetailsSkeleton(): JSX.Element {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid md:grid-cols-2 gap-8">
