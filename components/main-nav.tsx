@@ -87,7 +87,7 @@ const NavItems = ({ isMobile = false, categories = [], vendors = [], subcategori
               {categories.map((category) => (
                 <div key={category.id} className="space-y-3">
                   <Link
-                    href={`/categorias/${category.slug}`}
+                    href={`/tienda?categoria=${category.slug}`}
                     className="text-sm font-medium leading-none hover:underline"
                   >
                     <div className="flex items-center gap-2 mb-2">
@@ -103,7 +103,7 @@ const NavItems = ({ isMobile = false, categories = [], vendors = [], subcategori
                       .map(subcategory => (
                         <li key={subcategory.id}>
                           <Link
-                            href={`/categorias/${category.slug}/${subcategory.slug}`}
+                            href={`/tienda?categoria=${category.slug}&subcategoria=${subcategory.slug}`}
                             className="text-xs text-muted-foreground hover:text-primary"
                           >
                             {subcategory.name}
@@ -206,20 +206,13 @@ export function MainNav() {
       <div className="flex h-16 items-center px-4">
         <div className="w-[200px]">
           <Link href="/" className="flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6 text-primary"
-            >
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            <span className="font-bold text-xl">Navarron</span>
+            <Image
+              src="https://res.cloudinary.com/dddbhgbxn/image/upload/v1735812360/navarron-logo_lznwfz.svg"
+              alt="Navarron Logo"
+              width={120}
+              height={40}
+              className="h-8 w-auto"
+            />
           </Link>
         </div>
         <div className="flex-1 hidden lg:flex justify-center">

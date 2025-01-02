@@ -3,7 +3,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  categoryId: string;
+  subcategoryId: string; // Cambiado de categoryId a subcategoryId
   vendorId: string;
   inventory: number;
   slug: string;
@@ -20,7 +20,7 @@ const products: Product[] = [
     name: 'Queso D.O. Roncal',
     description: 'Queso de oveja con Denominación de Origen Roncal, curado durante 4 meses.',
     price: 15.99,
-    categoryId: '1',
+    subcategoryId: '6', // Productos Gourmet
     vendorId: '1',
     inventory: 50,
     slug: 'queso-do-roncal',
@@ -39,7 +39,7 @@ const products: Product[] = [
     name: 'Vino Tinto Reserva',
     description: 'Vino tinto reserva de la D.O. Navarra, envejecido en barrica de roble.',
     price: 12.50,
-    categoryId: '1',
+    subcategoryId: '5', // Bodegas y Vinos
     vendorId: '2',
     inventory: 100,
     slug: 'vino-tinto-reserva',
@@ -58,7 +58,7 @@ const products: Product[] = [
     name: 'Espárragos de Navarra',
     description: 'Espárragos blancos con Indicación Geográfica Protegida de Navarra.',
     price: 8.75,
-    categoryId: '1',
+    subcategoryId: '6', // Productos Gourmet
     vendorId: '3',
     inventory: 75,
     slug: 'esparragos-de-navarra',
@@ -76,7 +76,7 @@ const products: Product[] = [
     name: 'Chistorra de Navarra',
     description: 'Chistorra artesanal elaborada con carne de cerdo y pimentón de la Vera.',
     price: 6.99,
-    categoryId: '1',
+    subcategoryId: '1', // Carnicerías
     vendorId: '4',
     inventory: 60,
     slug: 'chistorra-de-navarra',
@@ -94,7 +94,7 @@ const products: Product[] = [
     name: 'Pacharán Artesanal',
     description: 'Licor tradicional navarro elaborado con endrinas silvestres.',
     price: 14.25,
-    categoryId: '1',
+    subcategoryId: '5', // Bodegas y Vinos
     vendorId: '2',
     inventory: 40,
     slug: 'pacharan-artesanal',
@@ -108,89 +108,35 @@ const products: Product[] = [
     ]
   },
   {
-    id: '8',
-    name: 'Miel de Romero',
-    description: 'Miel pura de romero recolectada en los campos de Navarra.',
-    price: 8.50,
-    categoryId: '1',
-    vendorId: '8',
-    inventory: 30,
-    slug: 'miel-de-romero',
-    coverImage: 'https://images.unsplash.com/photo-1587049352847-4e8123573f93?auto=format&fit=crop&w=800&q=60',
-    rating: 4.7,
-    features: ['100% natural', 'Sin aditivos', 'Propiedades antioxidantes'],
-    images: [
-      'https://images.unsplash.com/photo-1587049352847-4e8123573f93?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=60'
-    ]
-  },
-  {
-    id: '9',
-    name: 'Queso Idiazábal',
-    description: 'Queso Idiazábal D.O. curado, elaborado con leche cruda de oveja latxa.',
-    price: 18.75,
-    categoryId: '1',
-    vendorId: '1',
-    inventory: 25,
-    slug: 'queso-idiazabal',
-    coverImage: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=60',
-    rating: 4.9,
-    features: ['Denominación de Origen', 'Curación mínima de 2 meses', 'Sabor intenso'],
-    images: [
-      'https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1566454825481-9c20a44d1c8f?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1571166574917-826d6d3e8754?auto=format&fit=crop&w=800&q=60'
-    ]
-  },
-  {
-    id: '10',
-    name: 'Sidra Natural',
-    description: 'Sidra natural de Navarra, elaborada con manzanas autóctonas.',
-    price: 5.99,
-    categoryId: '1',
-    vendorId: '7',
-    inventory: 50,
-    slug: 'sidra-natural',
-    coverImage: 'https://images.unsplash.com/photo-1569384229829-896923a3c0cb?auto=format&fit=crop&w=800&q=60',
-    rating: 4.6,
-    features: ['Sin aditivos', 'Fermentación natural', 'Sabor fresco y ácido'],
-    images: [
-      'https://images.unsplash.com/photo-1569384229829-896923a3c0cb?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1620405116976-f0d46f8b5775?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1621873495914-1c921811e37f?auto=format&fit=crop&w=800&q=60'
-    ]
-  },
-  {
-    id: '11',
-    name: 'Pañuelo de San Fermín',
-    description: 'Pañuelo rojo tradicional para las fiestas de San Fermín.',
-    price: 12.00,
-    categoryId: '2',
-    vendorId: '6',
-    inventory: 100,
-    slug: 'panuelo-san-fermin',
-    coverImage: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=800&q=60',
+    id: '6',
+    name: 'Tarta de Manzana',
+    description: 'Deliciosa tarta de manzana elaborada con receta tradicional.',
+    price: 18.50,
+    subcategoryId: '4', // Panaderías y Pastelerías
+    vendorId: '5',
+    inventory: 20,
+    slug: 'tarta-de-manzana',
+    coverImage: 'https://images.unsplash.com/photo-1568571780765-9276ac8b75a7?auto=format&fit=crop&w=800&q=60',
     rating: 4.8,
-    features: ['100% algodón', 'Tinte natural', 'Tamaño estándar'],
+    features: ['Manzanas frescas', 'Masa casera', 'Sin conservantes'],
     images: [
-      'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1562699969-e9e01b5c2fb6?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1565025968566-82b0c3fefe5e?auto=format&fit=crop&w=800&q=60'
+      'https://images.unsplash.com/photo-1568571780765-9276ac8b75a7?auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1562007908-141f2a8d4ce4?auto=format&fit=crop&w=800&q=60'
     ]
   },
   {
-    id: '12',
-    name: 'Cerámica Artesanal',
-    description: 'Plato decorativo de cerámica pintado a mano con motivos tradicionales navarros.',
+    id: '7',
+    name: 'Cerámica Decorativa',
+    description: 'Jarrón de cerámica pintado a mano con motivos tradicionales navarros.',
     price: 45.00,
-    categoryId: '3',
+    subcategoryId: '12', // Cerámica
     vendorId: '6',
     inventory: 15,
-    slug: 'ceramica-artesanal',
+    slug: 'ceramica-decorativa',
     coverImage: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=800&q=60',
     rating: 4.9,
-    features: ['Hecho a mano', 'Pintado individualmente', 'Apto para uso alimentario'],
+    features: ['Hecho a mano', 'Pintado individualmente', 'Diseño único'],
     images: [
       'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=800&q=60',
       'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=60',
@@ -198,59 +144,56 @@ const products: Product[] = [
     ]
   },
   {
-    id: '13',
-    name: 'Txistorra',
-    description: 'Txistorra tradicional navarra, embutido curado listo para cocinar.',
-    price: 7.50,
-    categoryId: '4',
-    vendorId: '4',
-    inventory: 40,
-    slug: 'txistorra',
-    coverImage: 'https://images.unsplash.com/photo-1542901031-ec5eeb518e83?auto=format&fit=crop&w=800&q=60',
-    rating: 4.7,
-    features: ['Sin conservantes', 'Ahumado natural', 'Ideal para bocadillos y pinchos'],
-    images: [
-      'https://images.unsplash.com/photo-1542901031-ec5eeb518e83?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1588690793273-3cbc8f9db309?auto=format&fit=crop&w=800&q=60'
-    ]
-  },
-  {
-    id: '14',
-    name: 'Alpargatas Artesanales',
-    description: 'Alpargatas tradicionales hechas a mano, perfectas para el verano.',
-    price: 29.99,
-    categoryId: '2',
-    vendorId: '6',
-    inventory: 30,
-    slug: 'alpargatas-artesanales',
-    coverImage: 'https://images.unsplash.com/photo-1572789182634-c2e5e8a40b15?auto=format&fit=crop&w=800&q=60',
-    rating: 4.6,
-    features: ['Suela de yute', 'Parte superior de algodón', 'Hechas a mano en Navarra'],
-    images: [
-      'https://images.unsplash.com/photo-1572789182634-c2e5e8a40b15?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=800&q=60'
-    ]
-  },
-  {
-    id: '15',
-    name: 'Aceite de Oliva Virgen Extra',
-    description: 'Aceite de oliva virgen extra de la variedad Arróniz, típica de Navarra.',
-    price: 14.95,
-    categoryId: '1',
-    vendorId: '3',
-    inventory: 35,
-    slug: 'aceite-oliva-virgen-extra',
-    coverImage: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=60',
+    id: '8',
+    name: 'Libro "Patria" de Fernando Aramburu',
+    description: 'Novela galardonada que aborda el conflicto vasco a través de dos familias enfrentadas.',
+    price: 21.90,
+    subcategoryId: '24', // Librerías
+    vendorId: '7',
+    inventory: 25,
+    slug: 'libro-patria-fernando-aramburu',
+    coverImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=60',
     rating: 4.8,
-    features: ['Extracción en frío', 'Acidez máxima 0.2%', 'Botella oscura para mejor conservación'],
+    features: ['Tapa dura', 'Edición especial', 'Autor local'],
     images: [
-      'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1591448919361-b3a32f5c6e6b?auto=format&fit=crop&w=800&q=60',
-      'https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=800&q=60'
+      'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=60'
     ]
   },
+  {
+    id: '9',
+    name: 'Zapatos de Confort para Mujer',
+    description: 'Zapatos de piel con plantilla extraíble y suela antideslizante.',
+    price: 79.95,
+    subcategoryId: '8', // Zapaterías
+    vendorId: '8',
+    inventory: 15,
+    slug: 'zapatos-confort-mujer',
+    coverImage: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=800&q=60',
+    rating: 4.6,
+    features: ['Piel de primera calidad', 'Plantilla extraíble', 'Suela antideslizante'],
+    images: [
+      'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&w=800&q=60'
+    ]
+  },
+  {
+    id: '10',
+    name: 'Corte de Pelo y Peinado',
+    description: 'Servicio de corte de pelo y peinado personalizado.',
+    price: 35.00,
+    subcategoryId: '16', // Peluquerías
+    vendorId: '9',
+    inventory: 999,
+    slug: 'corte-pelo-peinado',
+    coverImage: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=60',
+    rating: 4.7,
+    features: ['Consulta personalizada', 'Productos de alta calidad', 'Estilistas profesionales'],
+    images: [
+      'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=60',
+      'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=60'
+    ]
+  }
 ];
 
 export async function getProducts(): Promise<Product[]> {

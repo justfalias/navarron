@@ -6,37 +6,37 @@ export interface Subcategory {
 }
 
 const subcategories: Subcategory[] = [
-  { id: '1', name: 'Restaurantes', slug: 'restaurantes', categoryId: '1' },
-  { id: '2', name: 'Bares y Cafeterías', slug: 'bares-y-cafeterias', categoryId: '1' },
-  { id: '3', name: 'Panaderías y Pastelerías', slug: 'panaderias-y-pastelerias', categoryId: '1' },
-  { id: '4', name: 'Tiendas Gourmet', slug: 'tiendas-gourmet', categoryId: '1' },
-  
-  { id: '5', name: 'Ropa y Complementos', slug: 'ropa-y-complementos', categoryId: '2' },
-  { id: '6', name: 'Zapaterías', slug: 'zapaterias', categoryId: '2' },
-  { id: '7', name: 'Moda Infantil', slug: 'moda-infantil', categoryId: '2' },
-  
-  { id: '8', name: 'Cerámica y Alfarería', slug: 'ceramica-y-alfareria', categoryId: '3' },
-  { id: '9', name: 'Joyería Artesanal', slug: 'joyeria-artesanal', categoryId: '3' },
-  { id: '10', name: 'Productos de Madera', slug: 'productos-de-madera', categoryId: '3' },
-  { id: '11', name: 'Arte y Decoración', slug: 'arte-y-decoracion', categoryId: '3' },
-  
-  { id: '12', name: 'Carnicerías', slug: 'carnicerias', categoryId: '4' },
-  { id: '13', name: 'Charcuterías', slug: 'charcuterias', categoryId: '4' },
-  { id: '14', name: 'Pescaderías', slug: 'pescaderias', categoryId: '4' },
-  { id: '15', name: 'Fruterías', slug: 'fruterias', categoryId: '4' },
-  
-  { id: '16', name: 'Peluquerías y Barberías', slug: 'peluquerias-y-barberias', categoryId: '5' },
-  { id: '17', name: 'Centros de Estética', slug: 'centros-de-estetica', categoryId: '5' },
-  { id: '18', name: 'Gimnasios y Centros Deportivos', slug: 'gimnasios-y-centros-deportivos', categoryId: '5' },
-  { id: '19', name: 'Reparaciones', slug: 'reparaciones', categoryId: '5' },
-  
-  { id: '20', name: 'Tiendas de Decoración', slug: 'tiendas-de-decoracion', categoryId: '6' },
-  { id: '21', name: 'Textiles para el Hogar', slug: 'textiles-para-el-hogar', categoryId: '6' },
-  { id: '22', name: 'Ferreterías y Bricolaje', slug: 'ferreterias-y-bricolaje', categoryId: '6' },
-  
-  { id: '23', name: 'Librerías', slug: 'librerias', categoryId: '7' },
-  { id: '24', name: 'Papelerías', slug: 'papelerias', categoryId: '7' },
-  { id: '25', name: 'Jugueterías', slug: 'jugueterias', categoryId: '7' }
+  { id: '1', name: 'Carnicerías', slug: 'carnicerias', categoryId: '1' },
+  { id: '2', name: 'Pescaderías', slug: 'pescaderias', categoryId: '1' },
+  { id: '3', name: 'Fruterías', slug: 'fruterias', categoryId: '1' },
+  { id: '4', name: 'Panaderías y Pastelerías', slug: 'panaderias-y-pastelerias', categoryId: '1' },
+  { id: '5', name: 'Bodegas y Vinos', slug: 'bodegas-y-vinos', categoryId: '1' },
+  { id: '6', name: 'Productos Gourmet', slug: 'productos-gourmet', categoryId: '1' },
+
+  { id: '7', name: 'Ropa', slug: 'ropa', categoryId: '2' },
+  { id: '8', name: 'Zapaterías', slug: 'zapaterias', categoryId: '2' },
+  { id: '9', name: 'Moda Infantil', slug: 'moda-infantil', categoryId: '2' },
+  { id: '10', name: 'Complementos', slug: 'complementos', categoryId: '2' },
+  { id: '11', name: 'Joyerías', slug: 'joyerias', categoryId: '2' },
+
+  { id: '12', name: 'Cerámica', slug: 'ceramica', categoryId: '3' },
+  { id: '13', name: 'Textiles', slug: 'textiles', categoryId: '3' },
+  { id: '14', name: 'Madera', slug: 'madera', categoryId: '3' },
+  { id: '15', name: 'Decoración', slug: 'decoracion', categoryId: '3' },
+
+  { id: '16', name: 'Peluquerías', slug: 'peluquerias', categoryId: '4' },
+  { id: '17', name: 'Centros de Estética', slug: 'centros-de-estetica', categoryId: '4' },
+  { id: '18', name: 'Reparaciones', slug: 'reparaciones', categoryId: '4' },
+  { id: '19', name: 'Academias', slug: 'academias', categoryId: '4' },
+
+  { id: '20', name: 'Ferreterías', slug: 'ferreterias', categoryId: '5' },
+  { id: '21', name: 'Muebles', slug: 'muebles', categoryId: '5' },
+  { id: '22', name: 'Electrodomésticos', slug: 'electrodomesticos', categoryId: '5' },
+  { id: '23', name: 'Jardinería', slug: 'jardineria', categoryId: '5' },
+
+  { id: '24', name: 'Librerías', slug: 'librerias', categoryId: '6' },
+  { id: '25', name: 'Papelerías', slug: 'papelerias', categoryId: '6' },
+  { id: '26', name: 'Prensa', slug: 'prensa', categoryId: '6' },
 ];
 
 export async function getSubcategories(): Promise<Subcategory[]> {

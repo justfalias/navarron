@@ -19,6 +19,7 @@ export interface Vendor {
   address: string;
   whatsapp: string;
   contactPerson: string;
+  subcategoryIds: string[]; // Cambiado de categoryIds a subcategoryIds
 }
 
 const vendors: Vendor[] = [
@@ -40,7 +41,8 @@ const vendors: Vendor[] = [
     email: 'info@queseriaroncal.com',
     address: 'Calle Mayor 5, 31415 Roncal, Navarra',
     whatsapp: '+34 666 123 456',
-    contactPerson: 'María Etxeberria'
+    contactPerson: 'María Etxeberria',
+    subcategoryIds: ['6'], // Productos Gourmet
   },
   {
     id: '2',
@@ -60,7 +62,8 @@ const vendors: Vendor[] = [
     email: 'info@bodegasochoa.com',
     address: 'Ctra. de Zaragoza, Km. 5,5, 31390 Olite, Navarra',
     whatsapp: '+34 687 654 321',
-    contactPerson: 'Javier Ochoa'
+    contactPerson: 'Javier Ochoa',
+    subcategoryIds: ['5'], // Bodegas y Vinos
   },
   {
     id: '3',
@@ -80,7 +83,8 @@ const vendors: Vendor[] = [
     email: 'info@elnavarrico.com',
     address: 'Polígono Industrial, Calle A, 31570 San Adrián, Navarra',
     whatsapp: '+34 639 876 543',
-    contactPerson: 'Ana Martínez'
+    contactPerson: 'Ana Martínez',
+    subcategorysubcategoryIds: ['6'], // Productos Gourmet
   },
   {
     id: '4',
@@ -100,7 +104,8 @@ const vendors: Vendor[] = [
     email: 'pedidos@embutidosarrieta.com',
     address: 'Calle San Nicolás 13, 31001 Pamplona, Navarra',
     whatsapp: '+34 654 321 987',
-    contactPerson: 'Miguel Arrieta'
+    contactPerson: 'Miguel Arrieta',
+    subcategoryIds: ['1'], // Carnicerías
   },
   {
     id: '5',
@@ -120,7 +125,8 @@ const vendors: Vendor[] = [
     email: 'info@pasteleriaLarramendi.com',
     address: 'Calle Estafeta 96, 31001 Pamplona, Navarra',
     whatsapp: '+34 678 901 234',
-    contactPerson: 'Laura Larramendi'
+    contactPerson: 'Laura Larramendi',
+    subcategoryIds: ['4'], // Panaderías y Pastelerías
   },
   {
     id: '6',
@@ -140,48 +146,72 @@ const vendors: Vendor[] = [
     email: 'contacto@artesanianavarra.com',
     address: 'Plaza de los Fueros 12, 31200 Estella, Navarra',
     whatsapp: '+34 612 345 678',
-    contactPerson: 'Carlos Echarri'
+    contactPerson: 'Carlos Echarri',
+    subcategoryIds: ['12', '13', '14'], // Cerámica, Textiles, Madera
   },
   {
     id: '7',
-    slug: 'cerveceria-naparbier',
-    name: 'Cervecería Naparbier',
-    description: 'Cervezas artesanales con sabores únicos de Navarra.',
-    longDescription: 'Cervecería Naparbier elabora cervezas artesanales con ingredientes locales y recetas innovadoras. Descubre una experiencia cervecera única, con sabores que reflejan la esencia de Navarra. Nuestro maestro cervecero combina técnicas tradicionales con métodos modernos para crear cervezas de carácter distintivo y calidad excepcional.',
-    imageUrl: 'https://images.unsplash.com/photo-1505075106905-fb052892c116?auto=format&fit=crop&w=800&q=60',
-    heroImageUrl: 'https://images.unsplash.com/photo-1436076863939-06870fe779c2?auto=format&fit=crop&w=1920&q=80',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1505075106905-fb052892c116?auto=format&fit=crop&w=80&h=80&q=60',
-    city: 'Noáin, Navarra',
-    foundedYear: 2010,
-    specialties: ['IPA artesanal', 'Cerveza de trigo', 'Stout de temporada', 'Cervezas experimentales'],
-    size: 'small',
-    areaId: '1',
-    phone: '+34 948 312 444',
-    email: 'info@naparbier.com',
-    address: 'Polígono Talluntxe II, Calle M-6, 31110 Noáin, Navarra',
-    whatsapp: '+34 634 567 890',
-    contactPerson: 'Juan Magaña'
+    slug: 'libreria-auzolan',
+    name: 'Librería Auzolan',
+    description: 'Librería independiente con una amplia selección de libros y eventos culturales.',
+    longDescription: 'Fundada en 1977, Librería Auzolan es un referente cultural en Pamplona. Ofrecemos una cuidada selección de libros en euskera y castellano, además de organizar presentaciones de libros, clubes de lectura y otras actividades culturales. Nuestro compromiso con la cultura local y la promoción de la lectura nos ha convertido en un punto de encuentro para los amantes de la literatura en Iturrama.',
+    imageUrl: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=60',
+    heroImageUrl: 'https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=1920&q=80',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=80&h=80&q=60',
+    city: 'Pamplona',
+    foundedYear: 1977,
+    specialties: ['Libros en euskera', 'Literatura infantil y juvenil', 'Eventos culturales'],
+    size: 'medium',
+    areaId: '5', // Iturrama
+    phone: '+34 948 275 535',
+    email: 'info@libreriaauzolan.com',
+    address: 'Irunlarrea Kalea, 9, 31008 Pamplona, Navarra',
+    whatsapp: '+34 644 555 123',
+    contactPerson: 'Mikel Zubeldia',
+    subcategoryIds: ['24', '19'], // Librerías, Academias
   },
   {
     id: '8',
-    slug: 'miel-del-pirineo',
-    name: 'Miel del Pirineo',
-    description: 'Miel orgánica recolectada en las montañas del Pirineo navarro.',
-    longDescription: 'Miel del Pirineo produce miel orgánica de alta calidad, recolectada en las montañas del Pirineo navarro. Nuestro compromiso con la sostenibilidad y la calidad nos permite ofrecer un producto natural y delicioso. Trabajamos en armonía con las abejas y la naturaleza para traer a tu mesa lo mejor de las flores silvestres del Pirineo.',
-    imageUrl: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=60',
-    heroImageUrl: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=1920&q=80',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=80&h=80&q=60',
-    city: 'Ochagavía,Ochagavía, Navarra',
-    foundedYear: 2005,
-    specialties: ['Miel de flores silvestres', 'Miel de castaño', 'Polen fresco', 'Propóleo'],
+    slug: 'calzados-garrido',
+    name: 'Calzados Garrido',
+    description: 'Zapatería familiar con una amplia selección de calzado para toda la familia.',
+    longDescription: 'Calzados Garrido es una zapatería familiar con más de 40 años de experiencia en el sector. Ofrecemos una amplia gama de calzado para hombre, mujer y niño, combinando marcas reconocidas con diseños propios. Nuestra atención personalizada y conocimiento del producto son nuestra seña de identidad. Además, nos especializamos en calzado de confort y zapatos ortopédicos para garantizar el bienestar de nuestros clientes.',
+    imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=60',
+    heroImageUrl: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1920&q=80',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=80&h=80&q=60',
+    city: 'Pamplona',
+    foundedYear: 1980,
+    specialties: ['Calzado de confort', 'Zapatos ortopédicos', 'Calzado infantil'],
     size: 'small',
-    areaId: '5',
-    phone: '+34 948 890 123',
-    email: 'contacto@mieldelpirineo.com',
-    address: 'Calle San Martín 8, 31680 Ochagavía, Navarra',
-    whatsapp: '+34 645 678 901',
-    contactPerson: 'Elena Iriarte'
-  }
+    areaId: '5', // Iturrama
+    phone: '+34 948 266 987',
+    email: 'info@calzadosgarrido.com',
+    address: 'Iturrama Kalea, 28, 31007 Pamplona, Navarra',
+    whatsapp: '+34 654 321 987',
+    contactPerson: 'Ana Garrido',
+    subcategoryIds: ['8', '9'], // Zapaterías, Moda Infantil
+  },
+  {
+    id: '9',
+    slug: 'peluqueria-imagen',
+    name: 'Peluquería Imagen',
+    description: 'Salón de belleza y peluquería con servicios personalizados y las últimas tendencias.',
+    longDescription: 'Peluquería Imagen es un salón de belleza moderno ubicado en el corazón de Iturrama. Nuestro equipo de profesionales altamente cualificados ofrece servicios de peluquería y estética utilizando productos de primera calidad. Nos mantenemos al día con las últimas tendencias en cortes, coloración y tratamientos capilares para garantizar que nuestros clientes luzcan y se sientan lo mejor posible.',
+    imageUrl: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=60',
+    heroImageUrl: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1920&q=80',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=80&h=80&q=60',
+    city: 'Pamplona',
+    foundedYear: 1995,
+    specialties: ['Cortes de pelo', 'Coloración', 'Tratamientos capilares', 'Maquillaje'],
+    size: 'small',
+    areaId: '5', // Iturrama
+    phone: '+34 948 277 788',
+    email: 'citas@peluqueriaimagen.com',
+    address: 'Avenida de Navarra, 5, 31008 Pamplona, Navarra',
+    whatsapp: '+34 678 123 456',
+    contactPerson: 'Elena Sánchez',
+    subcategoryIds: ['16', '17'], // Peluquerías, Centros de Estética
+  },
 ];
 
 export async function getVendors(): Promise<Vendor[]> {
