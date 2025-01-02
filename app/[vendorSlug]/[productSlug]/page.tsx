@@ -6,14 +6,14 @@ import { ErrorMessage } from '@/components/error-message'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 
-interface ProductPageProps {
+interface PageProps {
   params: {
     vendorSlug: string
     productSlug: string
   }
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage({ params }: PageProps) {
   const vendor = await getVendorBySlug(decodeURIComponent(params.vendorSlug))
 
   if (!vendor) {
