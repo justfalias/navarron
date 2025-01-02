@@ -27,10 +27,17 @@ export default async function Page({
 }: {
   params: { vendorSlug: string; productSlug: string }
 }) {
+  let vendorSlug, productSlug
   try {
-    const vendorSlug = decodeURIComponent(params.vendorSlug)
-    const productSlug = decodeURIComponent(params.productSlug)
-    
+    vendorSlug = decodeURIComponent(params.vendorSlug)
+    productSlug = decodeURIComponent(params.productSlug)
+  } catch (error) {
+    console.error('Error decoding URI components:', error)
+    notFound()
+    return
+  }
+  
+  try {
     const vendor = await getVendorBySlug(vendorSlug)
 
     if (!vendor) {
@@ -73,7 +80,7 @@ export default async function Page({
       </div>
     )
   } catch (error) {
-    console.error('Error decoding URI components:', error)
+    console.error('Error fetching vendor or product:', error)
     notFound()
   }
 }
