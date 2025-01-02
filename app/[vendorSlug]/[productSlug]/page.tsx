@@ -28,13 +28,16 @@ export default async function Page({
   params: { vendorSlug: string; productSlug: string }
 }) {
   try {
-    const vendor = await getVendorBySlug(decodeURIComponent(params.vendorSlug))
+    const vendorSlug = decodeURIComponent(params.vendorSlug)
+    const productSlug = decodeURIComponent(params.productSlug)
+    
+    const vendor = await getVendorBySlug(vendorSlug)
 
     if (!vendor) {
       notFound()
     }
 
-    const product = await getProductBySlug(decodeURIComponent(params.productSlug), vendor.id)
+    const product = await getProductBySlug(productSlug, vendor.id)
 
     if (!product) {
       return (
@@ -70,15 +73,8 @@ export default async function Page({
       </div>
     )
   } catch (error) {
-    console.error('Error in ProductPage:', error)
-    return (
-      <ErrorMessage
-        title="Error al cargar el producto"
-        description="Lo sentimos, ha ocurrido un error al cargar el producto. Por favor, inténtalo de nuevo más tarde."
-        actionText="Volver al inicio"
-        actionHref="/"
-      />
-    )
+    console.error('Error decoding URI components:', error)
+    notFound()
   }
 }
 
