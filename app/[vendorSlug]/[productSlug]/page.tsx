@@ -29,7 +29,7 @@ interface PageProps {
   }
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: { vendorSlug: string; productSlug: string } }) {
   let vendorSlug, productSlug
   try {
     vendorSlug = decodeURIComponent(params.vendorSlug)
