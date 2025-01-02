@@ -6,19 +6,32 @@ import { ErrorMessage } from '@/components/error-message'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 
-// Define the correct types for Next.js App Router page props
-type PageProps = {
+interface ProductPageProps {
   params: {
     vendorSlug: string
     productSlug: string
   }
-  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+async function ProductDetailsSkeleton() {
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid md:grid-cols-2 gap-8">
+        <Skeleton className="h-[400px] w-full" />
+        <div className="space-y-4">
+          <Skeleton className="h-8 w-3/4" />
+          <Skeleton className="h-6 w-1/4" />
+          <Skeleton className="h-24 w-full" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default async function ProductPage({
   params,
-  searchParams,
-}: PageProps) {
+}: ProductPageProps) {
   try {
     const vendor = await getVendorBySlug(decodeURIComponent(params.vendorSlug))
 
@@ -72,21 +85,5 @@ export default async function ProductPage({
       />
     )
   }
-}
-
-function ProductDetailsSkeleton(): JSX.Element {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid md:grid-cols-2 gap-8">
-        <Skeleton className="h-[400px] w-full" />
-        <div className="space-y-4">
-          <Skeleton className="h-8 w-3/4" />
-          <Skeleton className="h-6 w-1/4" />
-          <Skeleton className="h-24 w-full" />
-          <Skeleton className="h-10 w-full" />
-        </div>
-      </div>
-    </div>
-  )
 }
 
