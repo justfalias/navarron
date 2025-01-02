@@ -22,14 +22,20 @@ function ProductDetailsSkeleton() {
   )
 }
 
-interface PageProps {
-  params: {
-    vendorSlug: string
-    productSlug: string
-  }
-}
+// Eliminar la interfaz PageProps que está causando el conflicto
+// interface PageProps {
+//   params: {
+//     vendorSlug: string
+//     productSlug: string
+//   }
+// }
 
-export default async function Page({ params }: { params: { vendorSlug: string; productSlug: string } }) {
+// Usar la definición de tipos directamente en la función
+export default async function Page({
+  params,
+}: {
+  params: { vendorSlug: string; productSlug: string }
+}) {
   let vendorSlug, productSlug
   try {
     vendorSlug = decodeURIComponent(params.vendorSlug)
