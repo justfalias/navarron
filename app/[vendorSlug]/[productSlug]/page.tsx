@@ -22,14 +22,11 @@ function ProductDetailsSkeleton() {
   )
 }
 
-interface PageProps {
-  params: {
-    vendorSlug: string
-    productSlug: string
-  }
-}
-
-export default async function ProductPage({ params }: PageProps) {
+export default async function Page({
+  params,
+}: {
+  params: { vendorSlug: string; productSlug: string }
+}) {
   try {
     const vendor = await getVendorBySlug(decodeURIComponent(params.vendorSlug))
 
