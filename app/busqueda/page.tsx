@@ -6,6 +6,13 @@ import { SearchParams } from 'next/navigation'
 
 const SearchResults = lazy(() => import('@/components/search-results').then(mod => ({ default: mod.SearchResults })))
 
+interface SearchPageProps {
+  searchParams: {
+    q?: string
+    page?: string
+  }
+}
+
 async function getSearchResults(query: string, page: number = 1, limit: number = 10) {
   try {
     const res = await fetch(`/api/search?q=${encodeURIComponent(query)}&page=${page}&limit=${limit}`, { 
@@ -38,12 +45,7 @@ async function getSearchResults(query: string, page: number = 1, limit: number =
 
 export default async function SearchPage({ 
   searchParams 
-}: { 
-  searchParams: { 
-    q?: string
-    page?: string 
-  }
-}) {
+}: SearchPageProps) {
   const query = searchParams.q || ''
   const page = parseInt(searchParams.page || '1')
 
