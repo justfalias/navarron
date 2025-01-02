@@ -5,8 +5,13 @@ import { VendorProfile } from '@/components/vendor-profile'
 import ComerciosPage from '../comercios/page'
 import ProductosPage from '../productos/page'
 import { ErrorMessage } from '@/components/error-message'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
-export default async function VendorPage({ params }: { params: { vendorSlug: string } }) {
+export default async function VendorPage({ 
+  params 
+}: { 
+  params: Params 
+}) {
   // Handle special routes
   if (params.vendorSlug === 'comercios') {
     return <ComerciosPage searchParams={{}} />
