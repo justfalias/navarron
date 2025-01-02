@@ -5,6 +5,7 @@ import ProductDetails from '@/components/product-details'
 import { ErrorMessage } from '@/components/error-message'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
 function ProductDetailsSkeleton() {
   return (
@@ -34,12 +35,12 @@ function ProductDetailsSkeleton() {
 export default async function Page({
   params,
 }: {
-  params: { vendorSlug: string; productSlug: string }
+  params: Params
 }) {
   let vendorSlug, productSlug
   try {
-    vendorSlug = decodeURIComponent(params.vendorSlug)
-    productSlug = decodeURIComponent(params.productSlug)
+    vendorSlug = decodeURIComponent(params.vendorSlug as string)
+    productSlug = decodeURIComponent(params.productSlug as string)
   } catch (error) {
     console.error('Error decoding URI components:', error)
     notFound()
