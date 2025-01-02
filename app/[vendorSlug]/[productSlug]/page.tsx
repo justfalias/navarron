@@ -22,11 +22,14 @@ function ProductDetailsSkeleton() {
   )
 }
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { vendorSlug: string; productSlug: string }
-}) {
+interface PageProps {
+  params: {
+    vendorSlug: string
+    productSlug: string
+  }
+}
+
+export default async function ProductPage({ params }: PageProps) {
   try {
     const vendor = await getVendorBySlug(decodeURIComponent(params.vendorSlug))
 
@@ -47,10 +50,8 @@ export default async function ProductPage({
       )
     }
 
-    // Fetch related products
     const relatedProducts = await getRelatedProducts(product.id, vendor.id)
 
-    // Map the vendor info to each related product
     const relatedProductsWithVendor = relatedProducts.map(relatedProduct => ({
       ...relatedProduct,
       vendor: {
@@ -61,13 +62,15 @@ export default async function ProductPage({
     }))
 
     return (
-      <Suspense fallback={<ProductDetailsSkeleton />}>
-        <ProductDetails 
-          product={product} 
-          vendor={vendor} 
-          relatedProducts={relatedProductsWithVendor}
-        />
-      </Suspense>
+      <div className="container mx-auto">
+        <Suspense fallback={<ProductDetailsSkeleton />}>
+          <ProductDetails 
+            product={product} 
+            vendor={vendor} 
+            relatedProducts={relatedProductsWithVendor}
+          />
+        </Suspense>
+      </div>
     )
   } catch (error) {
     console.error('Error in ProductPage:', error)
