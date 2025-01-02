@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import { notFound } from 'next/navigation'
 import { PaginationControls } from "@/components/pagination-controls"
 import { ErrorMessage } from '@/components/error-message'
+import { SearchParams } from 'next/navigation'
 
 const SearchResults = lazy(() => import('@/components/search-results').then(mod => ({ default: mod.SearchResults })))
 
@@ -35,13 +36,16 @@ async function getSearchResults(query: string, page: number = 1, limit: number =
   }
 }
 
-export default async function SearchResultsPage({ 
+export default async function SearchPage({ 
   searchParams 
 }: { 
-  searchParams: { q: string; page?: string } 
+  searchParams: { 
+    q?: string
+    page?: string 
+  }
 }) {
-  const query = searchParams.q
-  const page = parseInt(searchParams.page || '1', 10)
+  const query = searchParams.q || ''
+  const page = parseInt(searchParams.page || '1')
 
   if (!query) {
     notFound()
@@ -54,7 +58,7 @@ export default async function SearchResultsPage({
       return (
         <ErrorMessage
           title="No se encontraron resultados"
-          description={`No encontramos resultados para &quot;${query}&quot;. Intenta con otros términos de búsqueda.`}
+          description={`No se encontraron productos para "${query}"`}
           actionText="Volver al inicio"
           actionHref="/"
         />
@@ -73,8 +77,7 @@ export default async function SearchResultsPage({
         <PaginationControls
           currentPage={page}
           totalPages={totalPages}
-          basePath={`/busqueda?q=${encodeURIComponent(query)}`}
-        />
+          basePath={`/busqueda?q=${encodeURIComponent(query)}`} totalItems={0} itemsPerPage={0}        />
       </div>
     )
   } catch (error) {
