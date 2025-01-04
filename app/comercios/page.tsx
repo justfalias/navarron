@@ -18,18 +18,18 @@ function LoadingFallback() {
   )
 }
 
-interface SearchParams {
-  [key: string]: string | string[] | undefined
-  categoria?: string
-  subcategoria?: string
-  area?: string
-  page?: string
+type SearchParams = {
+categoria?: string
+subcategoria?: string
+area?: string
+page?: string
+[key: string]: string | string[] | undefined
 }
 
 export default async function ComerciosPage({
-  searchParams,
+searchParams = {}
 }: {
-  searchParams: SearchParams
+searchParams: SearchParams
 }) {
   // Pre-fetch all data at once
   const [vendors, categories, subcategories, areas] = await Promise.all([
@@ -39,11 +39,11 @@ export default async function ComerciosPage({
     getAreas(),
   ])
 
-  // Parse search params
-  const page = Number(searchParams.page) || 1
-  const categoria = searchParams.categoria?.toString()
-  const subcategoria = searchParams.subcategoria?.toString()
-  const area = searchParams.area?.toString()
+// Parse search params
+const page = Number(searchParams?.page) || 1
+const categoria = searchParams?.categoria?.toString()
+const subcategoria = searchParams?.subcategoria?.toString()
+const area = searchParams?.area?.toString()
 
   return (
     <Providers>

@@ -8,8 +8,8 @@ import { getVendorBySlug } from '@/lib/vendors'
 const CART_COOKIE_NAME = 'navarron_cart'
 
 export async function getServerCart(): Promise<CartItem[]> {
-  const cartCookie = cookies().get(CART_COOKIE_NAME)
-  return cartCookie ? JSON.parse(cartCookie.value) : []
+const cartCookie = (await cookies()).get(CART_COOKIE_NAME)
+return cartCookie ? JSON.parse(cartCookie.value) : []
 }
 
 export async function addToServerCart(vendorSlug: string, productSlug: string, quantity: number) {
@@ -41,7 +41,8 @@ export async function addToServerCart(vendorSlug: string, productSlug: string, q
       cart.push({ ...product, quantity })
     }
 
-    cookies().set(CART_COOKIE_NAME, JSON.stringify(cart))
+    const cookieStore = await cookies()
+    cookieStore.set(CART_COOKIE_NAME, JSON.stringify(cart))
     return { success: true, cart }
   } catch (error) {
     console.error('Error in addToServerCart:', error)
@@ -54,19 +55,22 @@ export async function updateServerCartItemQuantity(productId: string, quantity: 
   const updatedCart = cart.map(item => 
     item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
   )
-  cookies().set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
-  return { success: true, cart: updatedCart }
+const cookieStore = await cookies()
+cookieStore.set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
+return { success: true, cart: updatedCart }
 }
 
 export async function removeFromServerCart(productId: string) {
   const cart = await getServerCart()
   const updatedCart = cart.filter(item => item.id !== productId)
-  cookies().set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
-  return { success: true, cart: updatedCart }
+const cookieStore = await cookies()
+cookieStore.set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
+return { success: true, cart: updatedCart }
 }
 
 export async function clearServerCart() {
-  cookies().delete(CART_COOKIE_NAME)
-  return { success: true, cart: [] }
+const cookieStore = await cookies()
+cookieStore.delete(CART_COOKIE_NAME)
+return { success: true, cart: [] }
 }
 

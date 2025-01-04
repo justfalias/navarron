@@ -5,56 +5,63 @@ import { VendorProfile } from '@/components/vendor-profile'
 import ComerciosPage from '../comercios/page'
 import ProductosPage from '../productos/page'
 import { ErrorMessage } from '@/components/error-message'
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
-export default async function VendorPage({ 
-  params 
-}: { 
-  params: Params 
-}) {
-  // Handle special routes
-  if (params.vendorSlug === 'comercios') {
-    return <ComerciosPage searchParams={{}} />
-  }
+type Params = { vendorSlug: string }
 
-  if (params.vendorSlug === 'productos') {
-    return <ProductosPage searchParams={{}} />
-  }
+export default async function VendorPage({ params }: { params: Promise<Params> }) {
+const { vendorSlug } = await params
 
-  try {
-    const vendor = await getVendorBySlug(params.vendorSlug)
+if (vendorSlug === 'comercios') {
+    return (
+    <ComerciosPage
+        params={{}}
+        searchParams={{
+        categoria: undefined,
+        subcategoria: undefined,
+        area: undefined,
+        page: undefined
+        }}
+    />
+    )
+}
+
+if (vendorSlug === 'productos') {
+    return <ProductosPage searchParams={Promise.resolve({})} />
+}
+
+try {
+    const vendor = await getVendorBySlug(vendorSlug)
 
     if (!vendor) {
-      notFound()
+    notFound()
     }
 
-    // Fetch products for this vendor
-    const { products, totalPages } = await getProductsByVendor(vendor.id, 1, 12) // Assuming 12 products per page
+    const { products, totalPages } = await getProductsByVendor(vendor.id, 1, 12)
 
-    // Add vendor slug to each product
     const productsWithVendor = products.map(product => ({
-      ...product,
-      vendor: { ...product.vendor, slug: vendor.slug }
+    ...product,
+    vendor: {
+        slug: vendor.slug
+    }
     }))
 
     return (
-      <VendorProfile 
+    <VendorProfile 
         vendor={vendor} 
         products={productsWithVendor} 
         currentPage={1} 
         totalPages={totalPages} 
-      />
+    />
     )
-  } catch (error) {
+} catch (error) {
     console.error('Error in VendorPage:', error)
     return (
-      <ErrorMessage
+    <ErrorMessage
         title="Error al cargar la página del comercio"
         description="Lo sentimos, ha ocurrido un error al cargar la información del comercio. Por favor, inténtalo de nuevo más tarde."
         actionText="Volver a la página principal"
         actionHref="/"
-      />
+    />
     )
-  }
 }
-
+}

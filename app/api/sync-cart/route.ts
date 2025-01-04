@@ -9,9 +9,9 @@ export async function POST(request: NextRequest) {
   // Here you would typically validate the cart data and perform any necessary
   // server-side operations (e.g., checking inventory, applying discounts, etc.)
   
-  // For now, we'll just update the server-side cart cookie
-  cookies().set(CART_COOKIE_NAME, JSON.stringify(clientCart))
-
+// Update the server-side cart cookie
+const cookieStore = await cookies()
+cookieStore.set(CART_COOKIE_NAME, JSON.stringify(clientCart))
   return NextResponse.json({ success: true })
 }
 

@@ -27,7 +27,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import Image from 'next/image'
 
-const categoryIcons = {
+const categoryIcons: { [key: string]: React.ComponentType<any> } = {
   'gastronomia': Store,
   'moda': ShoppingBag,
   'artesania-y-decoracion': Palette,
@@ -153,7 +153,7 @@ export function ProductFilters({
           <AccordionTrigger>Categorías</AccordionTrigger>
           <AccordionContent>
             {sortedCategories.map((category) => {
-              const Icon = categoryIcons[category.slug] || Store
+              const Icon = categoryIcons[category.slug as keyof typeof categoryIcons] || Store
               const categorySubcategories = subcategories
                 .filter(sub => sub.categoryId === category.id)
                 .sort((a, b) => a.name.localeCompare(b.name))

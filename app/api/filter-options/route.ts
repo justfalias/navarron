@@ -21,11 +21,11 @@ export async function GET(request: NextRequest) {
     product.price <= maxPrice
   )
 
-  const categoryOptions = categories.map(category => ({
-    id: category.id,
-    name: category.name,
-    count: filteredProducts.filter(p => p.categoryId === category.id).length,
-  }))
+const categoryOptions = categories.map(category => ({
+id: category.id,
+name: category.name,
+count: filteredProducts.filter(p => p.subcategoryId === category.id).length,
+}))
 
   const vendorOptions = vendors.map(vendor => ({
     id: vendor.id,

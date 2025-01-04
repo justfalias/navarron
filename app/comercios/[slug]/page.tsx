@@ -5,12 +5,15 @@ import { getVendorBySlug } from '@/lib/vendors'
 import { getAreaById } from '@/lib/areas'
 import { Card, CardContent } from "@/components/ui/card"
 
-interface ComercioPageProps {
-  params: { slug: string }
-}
+type Params = Promise<{ slug: string }>
 
-export default async function ComercioPage({ params }: ComercioPageProps) {
-  const comercio = await getVendorBySlug(params.slug)
+export default async function ComercioPage({
+  params
+}: {
+  params: Params
+}) {
+  const { slug } = await params
+  const comercio = await getVendorBySlug(slug)
 
   if (!comercio) {
     notFound()

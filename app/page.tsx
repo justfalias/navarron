@@ -13,15 +13,15 @@ export default async function Home() {
   const vendors = await getVendors()
 
   // Obtener los 8 productos más recientes con información del vendedor
-  const latestProducts = await Promise.all(
-    products.slice(-8).reverse().map(async (product) => {
-      const vendor = vendors.find(v => v.id === product.vendorId);
-      return { 
-        ...product, 
-        vendor: vendor ? { id: vendor.id, slug: vendor.slug, name: vendor.name } : null
-      };
-    })
-  );
+const latestProducts = await Promise.all(
+products.slice(-8).reverse().map(async (product) => {
+    const vendor = vendors.find(v => v.id === product.vendorId);
+    return { 
+    ...product, 
+    vendor: vendor || null
+    };
+})
+);
 
   return (
     <div>
@@ -55,8 +55,8 @@ export default async function Home() {
                       <p className="text-sm mb-2 line-clamp-2">{vendors[0].description}</p>
                       <div className="flex items-center text-sm">
                         <MapPin className="w-4 h-4 mr-1" />
-                        <span>{vendors[0].location}</span>
-                      </div>
+                        <span>{vendors[0].city}</span>
+                    </div>
                     </div>
                   </CardContent>
                 </Link>

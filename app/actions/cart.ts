@@ -8,8 +8,8 @@ import { getVendorBySlug } from '@/lib/vendors'
 const CART_COOKIE_NAME = 'navarron_cart'
 
 export async function getCart(): Promise<CartItem[]> {
-  const cartCookie = cookies().get(CART_COOKIE_NAME)
-  return cartCookie ? JSON.parse(cartCookie.value) : []
+const cartCookie = (await cookies()).get(CART_COOKIE_NAME)
+return cartCookie ? JSON.parse(cartCookie.value) : []
 }
 
 export async function addToCart(vendorSlug: string, productSlug: string, quantity: number) {
@@ -42,7 +42,8 @@ export async function addToCart(vendorSlug: string, productSlug: string, quantit
       cart.push({ ...product, quantity })
     }
 
-    cookies().set(CART_COOKIE_NAME, JSON.stringify(cart))
+    const cookieStore = await cookies()
+    cookieStore.set(CART_COOKIE_NAME, JSON.stringify(cart))
     console.log('Cart updated successfully')
     return cart
   } catch (error) {
@@ -56,19 +57,22 @@ export async function updateCartItemQuantity(productId: string, quantity: number
   const updatedCart = cart.map(item => 
     item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
   )
-  cookies().set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
-  return updatedCart
+const cookieStore = await cookies()
+cookieStore.set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
+return updatedCart
 }
 
 export async function removeFromCart(productId: string) {
   const cart = await getCart()
   const updatedCart = cart.filter(item => item.id !== productId)
-  cookies().set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
-  return updatedCart
+const cookieStore = await cookies()
+cookieStore.set(CART_COOKIE_NAME, JSON.stringify(updatedCart))
+return updatedCart
 }
 
 export async function clearCart() {
-  cookies().delete(CART_COOKIE_NAME)
-  return []
+const cookieStore = await cookies()
+cookieStore.delete(CART_COOKIE_NAME)
+return []
 }
 

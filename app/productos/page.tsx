@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { SearchParams } from 'next/navigation'
 import { getProducts } from '@/lib/products'
 import { getCategories } from '@/lib/categories'
 import { getVendors } from '@/lib/vendors'
@@ -9,7 +10,7 @@ import { ErrorMessage } from '@/components/error-message'
 import { ProductsLoading } from './loading'
 
 interface ProductsPageProps {
-  searchParams: { 
+searchParams: SearchParams & {
     page?: string
     category?: string
     vendor?: string
@@ -20,7 +21,7 @@ interface ProductsPageProps {
     discount?: string
     rating?: string
     search?: string
-  }
+}
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {

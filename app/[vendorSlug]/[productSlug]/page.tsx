@@ -5,7 +5,6 @@ import ProductDetails from '@/components/product-details'
 import { ErrorMessage } from '@/components/error-message'
 import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
 function ProductDetailsSkeleton() {
   return (
@@ -23,38 +22,32 @@ function ProductDetailsSkeleton() {
   )
 }
 
-// Eliminar la interfaz PageProps que está causando el conflicto
-// interface PageProps {
-//   params: {
-//     vendorSlug: string
-//     productSlug: string
-//   }
-// }
+type Params = Promise<{ vendorSlug: string; productSlug: string }>
 
-// Usar la definición de tipos directamente en la función
 export default async function Page({
-  params,
+  params
 }: {
   params: Params
 }) {
-  let vendorSlug, productSlug
+  const { vendorSlug, productSlug } = await params
+  let decodedVendorSlug, decodedProductSlug
   try {
-    vendorSlug = decodeURIComponent(params.vendorSlug as string)
-    productSlug = decodeURIComponent(params.productSlug as string)
+    decodedVendorSlug = decodeURIComponent(vendorSlug)
+    decodedProductSlug = decodeURIComponent(productSlug)
   } catch (error) {
     console.error('Error decoding URI components:', error)
     notFound()
     return
   }
-  
+
   try {
-    const vendor = await getVendorBySlug(vendorSlug)
+    const vendor = await getVendorBySlug(decodedVendorSlug)
 
     if (!vendor) {
       notFound()
     }
 
-    const product = await getProductBySlug(productSlug, vendor.id)
+    const product = await getProductBySlug(decodedProductSlug, vendor.id)
 
     if (!product) {
       return (
@@ -67,7 +60,7 @@ export default async function Page({
       )
     }
 
-    const relatedProductsWithVendor = await getRelatedProducts(product.id).then((relatedProducts) => 
+    const relatedProductsWithVendor = await getRelatedProducts(product.id, vendor.id).then((relatedProducts) => 
       relatedProducts.map((relatedProduct) => ({
         ...relatedProduct,
         vendor,
@@ -90,4 +83,3 @@ export default async function Page({
     notFound()
   }
 }
-

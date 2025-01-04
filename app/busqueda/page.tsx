@@ -2,16 +2,10 @@ import { Suspense, lazy } from 'react'
 import { notFound } from 'next/navigation'
 import { PaginationControls } from "@/components/pagination-controls"
 import { ErrorMessage } from '@/components/error-message'
-import { SearchParams } from 'next/navigation'
 
 const SearchResults = lazy(() => import('@/components/search-results').then(mod => ({ default: mod.SearchResults })))
 
-interface SearchPageProps {
-  searchParams: {
-    q?: string
-    page?: string
-  }
-}
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
 async function getSearchResults(query: string, page: number = 1, limit: number = 10) {
   try {
@@ -43,11 +37,14 @@ async function getSearchResults(query: string, page: number = 1, limit: number =
   }
 }
 
-export default async function SearchPage({ 
-  searchParams 
-}: SearchPageProps) {
-  const query = searchParams.q || ''
-  const page = parseInt(searchParams.page || '1')
+export default async function Page({
+  searchParams
+}: {
+  searchParams: SearchParams
+}) {
+  const params = await searchParams
+  const query = typeof params.q === 'string' ? params.q : ''
+  const page = typeof params.page === 'string' ? parseInt(params.page) : 1
 
   if (!query) {
     notFound()
